@@ -1,5 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../database/database.js'
+import { Reward } from './reward.model.js'
+import { Penance } from './penance.model.js'
 
 export const Task = sequelize.define('tasks', {
     id: {
@@ -60,4 +62,22 @@ export const Task = sequelize.define('tasks', {
     }
 }, {
     timestamps: false
+})
+
+Reward.hasOne(Task, {
+    foreignKey: 'reward_id',
+    sourceKey: 'id'
+})
+Task.belongsTo(Reward, {
+    foreignKey: 'reward_id',
+    target: 'id'
+})
+
+Penance.hasOne(Task, {
+    foreignKey: 'penance_id',
+    sourceKey: 'id'
+})
+Task.belongsTo(Penance, {
+    foreignKey: 'penance_id',
+    target: 'id'
 })
