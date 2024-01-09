@@ -9,8 +9,6 @@ import { CareRoutine } from './careRoutine.model.js'
 import { Finance } from './finance.model.js'
 import { SavingPlan } from './savingPlan.model.js'
 import { WishList } from './wishList.model.js'
-import { Level } from './level.model.js'
-
 export const User = sequelize.define('users', {
     id: {
         type: DataTypes.INTEGER,
@@ -147,15 +145,6 @@ User.hasMany(WishList, {
     sourceKey: 'id'
 })
 WishList.belongsTo(User, {
-    foreignKey: 'user_id',
-    target: 'id'
-})
-
-User.hasMany(Level, {
-    foreignKey: 'user_id',
-    sourceKey: 'id'
-})
-Level.belongsTo(User, {
     foreignKey: 'user_id',
     target: 'id'
 })
