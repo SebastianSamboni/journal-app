@@ -59,6 +59,11 @@ export const Task = sequelize.define('tasks', {
                 ]
             ]
         }
+    },
+    status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true 
     }
 }, {
     timestamps: false
