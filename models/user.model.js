@@ -9,6 +9,7 @@ import { CareRoutine } from './careRoutine.model.js'
 import { Finance } from './finance.model.js'
 import { SavingPlan } from './savingPlan.model.js'
 import { WishList } from './wishList.model.js'
+
 export const User = sequelize.define('users', {
     id: {
         type: DataTypes.INTEGER,
@@ -17,18 +18,37 @@ export const User = sequelize.define('users', {
     },
     name: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isAlpha: {
+                msg: 'El nombre no debe contener números u otro caracter!'
+            }
+        }
     },
     last_name: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isAlpha: {
+                msg: 'El apellido no debe contener números u otro caracter!'
+            }
+        }
     },
     nickname: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: {
-            name: 'unique_nickname',
-            msg: 'Ya existe un usuario registrado con este nombre de usuario.'
+        validate: {
+            isUnique: async nickname => {
+                const nickExists = await User.findOne({
+                    where: {nickname}
+                })
+                if (nickExists) {
+                    throw new Error('Ya existe un usuario registrado con este nombre de usuario')
+                }
+            },
+            isAlphanumeric: {
+                msg: 'El nombre de usuario solo puede contener letras y números!'
+            }
         }
     },
     email: {
@@ -41,7 +61,15 @@ export const User = sequelize.define('users', {
         validate: {
             isEmail: {
                 msg: 'El formato de correo no es válido'
-            }
+            },
+            isUnique: async email => {
+                const emailExists = await User.findOne({
+                    where: {email}
+                })
+                if (emailExists) {
+                    throw new Error('Ya existe un usuario registrado con este correo')
+                }
+            },
         }
     },
     password: {
@@ -54,15 +82,23 @@ export const User = sequelize.define('users', {
         defaultValue: null,
         validate: {
             isNumeric: {
-                args: [10],
-                msg: 'El número que ingresaste no es válido'
+                msg: 'Solo se permiten números!'
+            },
+            len: {
+                args: [10, 10],
+                msg: 'El número que ingresaste no es válido!'
             }
         }
     },
     profile_img: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: 'default.jpg'
+        defaultValue: '../uploads/default.jpg',
+        validate: {
+            isUrl: {
+                msg: 'La imagen debe ser una URL válida!'
+            }
+        }
     }
 }, {
     timestamps: false
