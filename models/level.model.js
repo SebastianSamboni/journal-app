@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../database/database.js'
-import { User } from './user.model.js'
 import { Reward } from './reward.model.js'
 
 export const Level = sequelize.define('levels', {
@@ -19,15 +18,6 @@ export const Level = sequelize.define('levels', {
     }
 }, {
     timestamps: false
-})
-
-Level.hasMany(User, {
-    foreignKey: 'level_id',
-    sourceKey: 'id'
-})
-User.belongsTo(Level, {
-    foreignKey: 'level_id',
-    target: 'id'
 })
 
 Reward.hasOne(Level, {

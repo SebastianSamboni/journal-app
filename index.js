@@ -1,6 +1,7 @@
 import app from './app.js'
 import { sequelize } from './database/database.js'
 import { data } from './config.js'
+import { createLevels } from './controllers/level.controller.js'
 
 // import './models/user.model.js'
 // import './models/calendar.model.js'
@@ -24,6 +25,7 @@ const main = async () => {
         await sequelize.sync({force: false})
         app.listen(port)
         console.log(`Server is listening on port ${port}`)
+        // createLevels()
     } catch (error) {
         console.log(`Unable to connect to the database: ${error}`)
     }
