@@ -2,7 +2,7 @@ import app from './app.js'
 import { sequelize } from './database/database.js'
 import { data } from './config.js'
 
-import './models/user.model.js'
+// import './models/user.model.js'
 // import './models/calendar.model.js'
 // import './models/careRoutine.model.js'
 // import './models/careTip.model.js'
@@ -21,7 +21,7 @@ const port = data.port
 
 const main = async () => {
     try {
-        await sequelize.sync({force: true})
+        await sequelize.sync({force: false})
         app.listen(port)
         console.log(`Server is listening on port ${port}`)
     } catch (error) {

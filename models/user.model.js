@@ -93,12 +93,7 @@ export const User = sequelize.define('users', {
     profile_img: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: '../uploads/default.jpg',
-        validate: {
-            isUrl: {
-                msg: 'La imagen debe ser una URL válida!'
-            }
-        }
+        defaultValue: '../uploads/default.jpg'
     }
 }, {
     timestamps: false

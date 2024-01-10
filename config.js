@@ -10,5 +10,6 @@ export const data = {
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         database: process.env.DB_DATABASE
-    }
+    },
+    jwtToken: process.env.TOKEN_SECRET
 }

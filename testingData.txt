@@ -1,0 +1,10 @@
+// USUARIO DE PRUEBA
+
+{
+  "name": "Sebastian",
+  "last_name": "Samboni",
+  "nickname": "FallenDecay",
+  "email": "sebas_18_08@hotmail.com",
+  "password": "testing123",
+  "cellphone": 3113038408
+}
