@@ -6,5 +6,6 @@
   "nickname": "FallenDecay",
   "email": "sebas_18_08@hotmail.com",
   "password": "testing123",
-  "cellphone": 3113038408
+  "cellphone": 3113038408,
+  "level_id": 1,
 }

@@ -30,6 +30,23 @@ export const createAccount = async (req, res) => {
         })
         res.status(200).json(newUser)
     } catch (error) {
+        if (
+            error.name === 'SequelizeValidationError' ||
+            error.name === 'SequelizeUniqueConstraintError'
+        ) {
+            let errors = []
+            
+            if (error.name === 'SequelizeUniqueConstraintError') {
+                errors.push({message: error.original.detail})
+            }
+            else {
+                errors = error.errors.map(err => ({
+                    message: err.message
+                }));
+            }
+
+            return res.status(400).json({ error: 'Error de validación', errors })
+        } 
         res.status(500).json({message: error.message})
     }
 }

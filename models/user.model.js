@@ -83,6 +83,11 @@ export const User = sequelize.define('users', {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: '../uploads/default.jpg'
+    },
+    user_xp: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        defaultValue: 0
     }
 }, {
     timestamps: false

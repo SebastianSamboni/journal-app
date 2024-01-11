@@ -11,7 +11,9 @@ export const createAccessToken = (user) => {
         nickname: user.nickname,
         email: user.email,
         cellphone: user.cellphone,
-        profile_img: user.profile_img
+        profile_img: user.profile_img,
+        user_xp: user.user_xp,
+        level_id: user.level_id
     }
 
     return new Promise((resolve, reject) => {
